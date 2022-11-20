@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include egdoc.vim"
+      include_role:
+        name: "egdoc.vim"
+      vars:
+        vim_plugins_repositories:
+          - https://github.com/preservim/nerdcommenter

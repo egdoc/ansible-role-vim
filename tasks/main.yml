@@ -1,0 +1,33 @@
+---
+- name: Ensure packages are installed
+  become: true
+  ansible.builtin.package:
+    name:
+      - vim
+      - git
+    state: latest
+  when: vim_install_packages
+
+- name: Ensure autoload directory exists
+  ansible.builtin.file:
+    path: ~/.vim/autoload
+    state: directory
+
+- name: Install Pathogen
+  ansible.builtin.get_url:
+    url: '{{ vim_pathogen_url }}'
+    dest: ~/.vim/autoload/pathogen.vim
+
+- name: Clone plugins
+  ansible.builtin.git:
+    repo: '{{ item is string | ternary(item, item.url) }}'
+    version: '{{ item.branch|default("master") }}'
+    dest: '{{ vim_plugins_directory }}/{{ item is string | ternary(item, item.url) | basename }}'
+    depth: 1
+    update: true
+    force: true
+  loop: '{{ vim_plugins_repositories }}'
+
+- name: Build help tags
+  ansible.builtin.command: 'vim -c "call pathogen#infect()" -c "call pathogen#helptags()" -c "qa"'
+  changed_when: false

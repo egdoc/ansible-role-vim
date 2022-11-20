@@ -1,0 +1,3 @@
+---
+vim_pathogen_url: https://tpo.pe/pathogen.vim
+vim_plugins_directory: ~/.vim/bundle
