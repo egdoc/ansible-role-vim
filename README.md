@@ -1,4 +1,4 @@
-Role Name
+Ansible Role: vim
 =========
 
 Ansible role to install vim and vim plugins with Pathogen
