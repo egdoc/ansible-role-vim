@@ -1,12 +1,9 @@
 ---
-- name: Ensure packages are installed
+- name: Ensure vim is installed
   become: true
   ansible.builtin.package:
-    name:
-      - vim
-      - git
-    state: latest
-  when: vim_install_packages
+    name: vim
+    state: present
 
 - name: Ensure autoload directory exists
   ansible.builtin.file:

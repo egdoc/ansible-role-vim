@@ -4,5 +4,7 @@
   tasks:
     - name: Ensure packages are installed
       ansible.builtin.package:
-        name: sudo
+        name:
+          - sudo
+          - git
         state: latest

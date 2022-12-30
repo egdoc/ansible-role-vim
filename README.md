@@ -3,18 +3,11 @@ Ansible Role: vim
 
 Ansible role to install vim and vim plugins with Pathogen
 
-Requirements
-------------
-
-Vim and git must be available on the target host (they can be optionally
-installed with this role).
-
 Role Variables
 --------------
 
 |Variable|Description|Default
 ---------|-----------|-------
-vim_install_packages|Whether vim and git packages should be installed by the role |true
 vim_plugins_repositories|List of plugins repositories|[ ]
 vim_plugins_directory|Directory where to clone plugins|~/.vim/bundle
 vim_pathogen_url|Vim-pathogen url|https://tpo.pe/pathogen.vim
@@ -22,7 +15,7 @@ vim_pathogen_url|Vim-pathogen url|https://tpo.pe/pathogen.vim
 Dependencies
 ------------
 
-None
+git
 
 Example Playbook
 ----------------
