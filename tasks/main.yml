@@ -24,7 +24,3 @@
     update: true
     force: true
   loop: '{{ vim_plugins_repositories }}'
-
-- name: Build help tags
-  ansible.builtin.command: 'vim -c "call pathogen#infect()" -c "call pathogen#helptags()" -c "qa"'
-  changed_when: false

@@ -22,12 +22,3 @@
         that:
           - nerdcommenter.stat.exists
           - nerdcommenter.stat.isdir
-
-    - name: Stat ~/.vim/bundler/nerdcommenter/doc/tags
-      ansible.builtin.stat:
-        path: ~/.vim/bundle/nerdcommenter/doc/tags
-      register: helptags
-
-    - name: Verify that ~/.vim/bundler/nerdcommenter/doc/tags exists
-      ansible.builtin.assert:
-        that: helptags.stat.exists
