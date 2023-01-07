@@ -1,2 +1,5 @@
 ---
 vim_plugins_repositories: []
+vim_dotfiles_repo: ""
+vim_dotfiles_repo_dest:  ~/.dotfiles
+vim_dotfiles_files: []

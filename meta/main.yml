@@ -9,3 +9,11 @@ galaxy_info:
     - vim
     - pathogen
     - plugin
+
+dependencies:
+  - role: egdoc.dotfiles
+    dotfiles_repo: '{{ vim_dotfiles_repo }}'
+    dotfiles_repo_dest: '{{ vim_dotfiles_repo_dest  }}'
+    dotfiles_files: '{{ vim_dotfiles_files }}'
+    when:
+      - vim_dotfiles_repo and vim_dotfiles_files
