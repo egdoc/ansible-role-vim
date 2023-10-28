@@ -1,0 +1,14 @@
+---
+argument_specs:
+  main:
+    author: Egidio Docile
+    description: Ansible role to install and configure Vim on Linux.
+    options:
+      vim_global_editor:
+        type: bool
+        default: false
+        description: Whether Vim should globally be set as the default text editor.
+      vim_install_gvim:
+        type: bool
+        default: false
+        description: Whether the GUI version of Vim should also be installed.

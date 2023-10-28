@@ -1,0 +1,8 @@
+---
+- name: Converge
+  gather_facts: false
+  hosts: all
+  roles:
+    - role: "egdoc.vim"
+      vim_global_editor: true
+      vim_install_gvim: true

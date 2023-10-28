@@ -1,0 +1,49 @@
+---
+- name: Gather facts
+  ansible.builtin.setup:
+    gather_subset: os_family
+  when: ansible_facts.os_family is not defined
+
+- name: Source distribution-specific variables
+  ansible.builtin.include_vars:
+    file: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_facts.os_family | lower }}.yml'
+
+- name: Ensure apt cache is refreshed
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_facts.os_family | lower == 'debian'
+
+- name: Ensure Vim is installed
+  ansible.builtin.package:
+    name: vim
+    state: present
+
+- name: Ensure GVim is installed
+  ansible.builtin.package:
+    name: '{{ vim_gvim_package_name }}'
+    state: present
+  when: vim_install_gvim | bool
+
+- name: Ensure Vim is set as global EDITOR (Redhat)
+  ansible.builtin.lineinfile:
+    path: /etc/profile.d/sh.local
+    regexp: '^export EDITOR='
+    line: 'export EDITOR="/usr/bin/vim"'
+    insertafter: EOF
+    mode: '644'
+    owner: root
+    group: root
+  when:
+    - vim_global_editor | bool
+    - ansible_facts.os_family | lower == "redhat"
+
+- name: Set Vim as global default (Debian)
+  community.general.alternatives:
+    name: editor
+    path: /usr/bin/vim
+  when:
+    - vim_global_editor | bool
+    - ansible_facts.os_family | lower == "debian"
